@@ -1,0 +1,13 @@
+//запрос  с выводом всех данных из таблицы countries базы данных homework
+select * from homework.countries;
+
+//запрос  с выводом всех данных из таблицы regions базы данных homework
+select * from homework.regions;
+
+//запрос  с выводом всех данных из таблицы regions базы данных homework
+select * from homework.cities;
+
+// Вывод всех городов МО
+select title from countries.cities where region_id = 1;
+
+//следующие задания подготовлю к следующему уроку

@@ -1,0 +1,40 @@
+//Создание VIEW с вычислением средней зп на отдел
+CREATE VIEW `avg_zp` AS  SELECT `otdel`, AVG(`zp`) FROM `personal` GROUP BY `otdel`;
+
+//Создание VIEW с вычислением максимального зп у сотрудника
+CRAETE VIEW `max_zp_sotr` AS SELECT MAX(zp), CONCAT(name,' ',last_name) as full_name FROM sotrudniki.personal group by full_name order by max(zp) DESC;
+
+//Создание VIEW с удалением сотрудника с макс зп
+CREATE VIEW `del_maxzp_sotr` AS Delete FROM sotrudniki.personal ORDER BY `zp` DESC LIMIT 1; 
+
+//Создание VIEW с подсчетом кол-ва сотрудников
+CREATE VIEW `kolvo_sotr` AS SELECT COUNT(*) from sotrudniki.personal;
+
+//Создание VIEW с поиском кол-ва сотрудников и суммой денег на отдел
+CREATE VIEW `all_sotr_and_summa` AS SELECT `otdel`, sum(`zp`) as 'Cумма на отдел' from sotrudniki.personal GROUP BY `otdel` ASC;
+
+
+
+//Создание функции 
+
+
+delimiter $$
+CREATE FUNCTION `finder` (y VARCHAR(30))
+returns VARCHAR(50)
+BEGIN
+RETURN (SELECT * FROM `personal` WHERE `name` = y);
+END$$
+
+
+//Создание  триггера
+
+CREATE TRIGGER `bonus` AFTER INSERT INTO `personal`
+FOR EACH ROW
+INSERT INTO `salary`(sotr_id, `bonus`,`salary`,`data`) VALUES (NEW.id,30000,3000,CURDATE());
+
+
+
+//Для проверки триггер
+INSERT INTO `personal`(`name`,`last_name`,`birthday`,`dolznost`,`otdel`,`zp`) VALUES ('Петр','Снежин','1988-02-03','Программист',1,'32000');
+
+

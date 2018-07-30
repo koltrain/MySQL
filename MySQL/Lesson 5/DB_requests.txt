@@ -1,0 +1,10 @@
+//Транзакция по уменьшению зп для ИТ-отдела и увеличению зп бухгалтерии ( всё как в жизни 8)  )
+SET AUTOCOMMIT = 0
+BEGIN;
+UPDATE `personal` SET `zp` = `zp` - 4000 WHERE `otdel` = 1;
+UPDATE `personal` SET `zp` = `zp` + 4000 WHERE `otdel` = 2;
+COMMIT;
+
+
+//
+EXPLAIN SELECT * FROM `personal` WHERE `name` LIKE '%а';

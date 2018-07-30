@@ -1,0 +1,44 @@
+// Создание базы
+Create schema 'Homework';
+
+// Создание таблицы countries
+Create table `homework`.`countries` (
+`id` int not null auto_increment,
+`title` varchar(150) not null,
+Primary Key (`id`),
+Index `Index` (`title` ASC));
+
+//Создание таблицы regions
+Create table 'homework'.'regions (
+'id' int not null auto_increment,
+'country_id' int not null,
+'title' varchar(150) not null,
+Primary key('id'),
+Index 'Index'('title' ASC);
+Add Index '123_idx' ('country' ASC),
+Foreign key ('country_id')
+Add constraint '123' references 'homework' . 'countries'('id')
+On delete restrict
+On update cascade;
+)
+
+//Создание таблицы cities
+create table 'homework' . 'cities' (
+'id' int not null auto_increment,
+'country_id' int not null,
+'important' tinyint(1) not null,
+'region_id' int not null,
+'title' varchar(150) not null,
+Primary Key ('id'),
+Index 'index'('title' ASC),
+Index '1234_idx'('country_id' ASC),
+Index '12345_idx'('region_id' ASC),
+Foreign Key ('country_id')
+Add constraint '1234' references 'homework' . 'countries'('id')
+On delete restrict
+On update cascade,
+Foreign Key ('region_id')
+Add constraint '12345' references 'homework' . 'regions'('id')
+On delete restrict
+On update cascade;
+)
